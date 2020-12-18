@@ -16,6 +16,9 @@ export default class App extends React.Component {
             <Route exact path="/home">
               <PayrollHome />
             </Route>
+            <Route exact path="/form/:id">
+              <PayrollForm />
+            </Route>
           </Switch>
         </BrowserRouter>
       </div>

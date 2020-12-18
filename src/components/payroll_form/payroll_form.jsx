@@ -63,7 +63,7 @@ const PayrollForm = props => {
     setForm({
       ...formValue,
       ...obj,
-      profileUrl: obj.profile,
+      profileUrl: obj.profileUrl,
       departmentValue: obj.department,
       isUpdate: true,
       day: array[0],

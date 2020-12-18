@@ -1,7 +1,6 @@
 {
   "employee": [
     {
-      "id": 1,
       "name": "firstEmp",
       "department": [
         "HR"
@@ -9,8 +8,9 @@
       "gender": "female",
       "salary": "40000",
       "startDate": "10 Jan 2020",
-      "notes": "firt note",
-      "profileUrl": ""
+      "notes": "first note",
+      "id": 1,
+      "profileUrl": "../../assets/profile-images/Ellipse -3.png"
     },
     {
       "name": "Jagriti",
@@ -18,11 +18,11 @@
         "Engineer"
       ],
       "gender": "female",
-      "salary": "44300",
+      "salary": "35200",
       "startDate": "1 Jan 2020",
       "notes": "",
       "id": 2,
-      "profileUrl": "../../assets/profile-images/Ellipse -3.png"
+      "profileUrl": "../../assets/profile-images/Ellipse 1.png"
     }
   ]
 }

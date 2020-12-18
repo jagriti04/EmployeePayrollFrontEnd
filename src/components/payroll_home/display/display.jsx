@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import EmployeeService from "../../../services/employee-service";
 import "./display.scss"
 import profile1 from "../../../assets/profile-images/Ellipse -1.png";
@@ -53,7 +53,7 @@ const Display = (props) => {
               <td> {element.salary} </td>
               <td> {element.startDate} </td>
               <td>
-                <Link to="./form">
+                <Link to={{pathname: `/form/${element.id}`}} >
                   <img onClick={() => update(element.id)} src={edit} alt="edit" />
                 </Link>
                 <img onClick={() => remove(element.id)} src={deleteImg} alt="delete" />
