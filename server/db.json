@@ -1,0 +1,16 @@
+{
+  "employee" : [
+    {
+      "id" : 1,
+      "name" : "firstEmp",
+      "department": [
+        "HR"
+      ],
+      "gender": "female",
+      "salary": "100000",
+      "startDate": "10 Jan 2020",
+      "notes" : "firt note",
+      "profileUrl": ""
+    }
+  ]
+}
