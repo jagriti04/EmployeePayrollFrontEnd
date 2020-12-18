@@ -19,6 +19,13 @@ class AxiosService {
       data: data
     })
   }
+
+  deleteService(url, id) {
+    return axios({
+      method: 'delete',
+      url: url
+    })
+  }
 }
 
 module.exports = new AxiosService();

@@ -1,16 +1,23 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
-// import EmployeeService from "../../../services/employee-service";
+import {Link, withRouter } from "react-router-dom";
+import EmployeeService from "../../../services/employee-service";
 import "./display.scss"
 import profile1 from "../../../assets/profile-images/Ellipse -1.png";
 import edit from "../../../assets/icons/create-black-18dp.svg";
 import deleteImg from "../../../assets/icons/delete-black-18dp.svg"
 
-const Display = props => {
-  // const employeeService = new EmployeeService();
+const Display = (props) => {
+  const employeeService = new EmployeeService();
 
   const remove = (empId) => {
     console.log("in remove func " + empId);
+    employeeService.deleteEmployee(empId)
+      .then(data => {
+        console.log("deleted successfully");
+        props.getAllEmployees();
+      }).catch(err => {
+        console.log("error in deletion ", err);
+      })
   }
 
   const update = (empId) => {
@@ -45,8 +52,11 @@ const Display = props => {
               </td>
               <td> {element.salary} </td>
               <td> {element.startDate} </td>
-              <td> <img onClick={() => remove(element.id)} src={deleteImg} alt="delete" /> 
-                  <img onClick={()=> update(element.id)} src={edit} alt="edit" />
+              <td>
+                <Link to="./form">
+                  <img onClick={() => update(element.id)} src={edit} alt="edit" />
+                </Link>
+                <img onClick={() => remove(element.id)} src={deleteImg} alt="delete" />
               </td>
             </tr>
           ))}

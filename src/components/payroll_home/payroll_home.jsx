@@ -16,10 +16,10 @@ class PayrollHome extends React.Component {
   }
 
   componentDidMount() {
-    this.getAllEmployee();
+    this.getAllEmployees();
   }
 
-  getAllEmployee = () => {
+  getAllEmployees = () => {
     this.employeeService
       .getEmployees()
       .then(data => {
@@ -56,7 +56,7 @@ class PayrollHome extends React.Component {
           </div>
 
           <div className="table-main">
-            <Display employeeArray={this.state.employeeArray} />
+            <Display employeeArray={this.state.employeeArray} getAllEmployees={this.getAllEmployees} />
           </div>
         </div>
       </div>

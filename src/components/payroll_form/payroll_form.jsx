@@ -143,11 +143,19 @@ const PayrollForm = props => {
       profileUrl: formValue.profileUrl,
     };
     console.log(employee);
-    employeeService.addEmployee(employee).then(data => {
-      console.log("data added");
-    }).catch(err => {
+    if (formValue.isUpdate == true) {
+      employeeService.updateEmployee(employee).then(data => {
+        console.log("updated successfully");
+      }).catch(err => {
+        console.log("error in updation is ", err);
+      })
+    } else {
+      employeeService.addEmployee(employee).then(data => {
+        console.log("data added");
+      }).catch(err => {
         console.log("err while add");
-    })
+      })
+    }
   }
 
   const reset = () => {
@@ -424,8 +432,7 @@ const PayrollForm = props => {
             </Link>
 
             <div className="submit-reset">
-              <button to="/home"
-                type="submit"
+              <button type="submit"
                 className="button submitButton"
                 id="submitButton"
               >
