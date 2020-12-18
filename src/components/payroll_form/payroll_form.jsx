@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import profile1 from "../../assets/profile-images/Ellipse -3.png"
-import logo from "../../assets/images/logo.png";
 import "./payroll_form.css";
 import { useParams, Link, withRouter } from "react-router-dom";
 import EmployeeService from "../../services/employee-service";
+import Header from "../header/header";
 
 const PayrollForm = props => {
   let initialValue = {
@@ -166,15 +166,7 @@ const PayrollForm = props => {
 
   return (
     <div className="payroll-form">
-      <header className="header row center">
-        <div className="logo-content">
-          <img src={logo} alt="" />
-          <div>
-            <span className="emp-text">EMPLOYEE</span> <br />
-            <span className="emp-text emp-payroll">PAYROLL</span>
-          </div>
-        </div>
-      </header>
+      <Header/>
       <div className="content">
         <form className="form" action="#" onSubmit={handleSubmit}>
           <div className="form-head">Employee Payroll form</div>

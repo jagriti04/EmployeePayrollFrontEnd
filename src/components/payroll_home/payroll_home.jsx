@@ -1,9 +1,10 @@
 import React from "react";
 import Display from "./display/display";
+import Header from "../header/header";
 import EmployeeService from "../../services/employee-service";
 import addUser from "../../assets/icons/add-24px.svg"
 import {Link} from "react-router-dom";
-import logo from "../../assets/images/logo.png";
+import "./payroll_home.css";
 
 class PayrollHome extends React.Component {
   constructor(props) {
@@ -36,19 +37,11 @@ class PayrollHome extends React.Component {
   render() {
     return (
       <div className="home">
-        <header className="header-content header">
-          <div className="logo-content">
-            <img src={logo} />
-            <div>
-              <span className="emp-text">EMPLOYEE</span> <br />
-              <span className="emp-text emp-payroll">PAYROLL</span>
-            </div>
-          </div>
-        </header>
+        <Header/>
         <div className="main-content">
           <div className="header-content">
             <div className="emp-details-text">
-              Employee Details <div class="emp-count"> 10</div>
+              Employee Details <div class="emp-count"> </div>
             </div>
             <Link to="form" className="add-button">
               <img src={addUser} alt="" /> Add User

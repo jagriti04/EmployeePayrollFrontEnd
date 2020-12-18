@@ -25,43 +25,46 @@ const Display = (props) => {
   }
 
   return (
-    <table id="display" className="display">
-      <tbody>
-        <tr key={-1}>
-          <th> Profile Image </th>
-          <th> Name </th>
-          <th> Gender </th>
-          <th> Department </th>
-          <th> Salary </th>
-          <th> Start Date </th>
-          <th> Actions </th>
-        </tr>
-        {props.employeeArray &&
-          props.employeeArray.map((element, ind) => (
-            <tr key={ind}>
-              <td>
-                <img className="profile" src={profile1} alt="profile" />
-              </td>
-              <td> {element.name} </td>
-              <td> {element.gender} </td>
-              <td>
-                {element.department &&
-                  element.department.map(dept => (
-                    <div className="dept-label"> {dept}</div>
-                  ))}
-              </td>
-              <td> {element.salary} </td>
-              <td> {element.startDate} </td>
-              <td>
-                <Link to={{pathname: `/form/${element.id}`}} >
-                  <img onClick={() => update(element.id)} src={edit} alt="edit" />
-                </Link>
-                <img onClick={() => remove(element.id)} src={deleteImg} alt="delete" />
-              </td>
-            </tr>
-          ))}
-      </tbody>
-    </table>
+    <div className="tableDiv">
+      <table id="display" className="display">
+        <tbody>
+          <tr key={-1}>
+            <th> Profile Image </th>
+            <th> Name </th>
+            <th> Gender </th>
+            <th> Department </th>
+            <th> Salary </th>
+            <th> Start Date </th>
+            <th> Actions </th>
+          </tr>
+          {props.employeeArray &&
+            props.employeeArray.map((element, ind) => (
+              <tr key={ind}>
+                <td>
+                  <img className="profile" src={profile1} alt="profile" />
+                </td>
+                <td> {element.name} </td>
+                <td> {element.gender} </td>
+                <td>
+                  {element.department &&
+                    element.department.map(dept => (
+                      <div className="dept-label"> {dept}</div>
+                    ))}
+                </td>
+                <td> {element.salary} </td>
+                <td> {element.startDate} </td>
+                <td>
+                  <Link to={{ pathname: `/form/${element.id}` }} >
+                    <img onClick={() => update(element.id)} src={edit} alt="edit" />
+                  </Link>
+                  <img onClick={() => remove(element.id)} src={deleteImg} alt="delete" />
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    </div>
+
   );
 };
 
