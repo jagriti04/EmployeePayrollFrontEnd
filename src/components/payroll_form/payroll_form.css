@@ -1,8 +1,7 @@
 .payroll-form {
-  margin: 0;
+  margin: auto;
   height: 100%;
 }
-
 .header {
   padding: 15px 0;
   background-color: #ffffff;
@@ -60,6 +59,7 @@
   border: 1px solid #f5f5f5;
   border-radius: 8px;
   opacity: 1;
+  margin: auto;
 }
 
 .form-head {
@@ -71,7 +71,7 @@
   padding-bottom: 20px;
 }
 
-.row-content {
+.row {
   display: flex;
   flex-direction: row;
   margin-bottom: 10px;

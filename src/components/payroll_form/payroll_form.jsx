@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import profile1 from "../../assets/profile-images/Ellipse -3.png"
+import logo from "../../assets/images/logo.png";
 import "./payroll_form.css";
 import { useParams, Link, withRouter } from "react-router-dom";
 import EmployeeService from "../../services/employee-service";
@@ -14,9 +15,9 @@ const PayrollForm = props => {
       { url: "../../assets/profile-images/Ellipse -7.png" }
     ],
     allDepartment: ["HR", "Sales", "Finance", "Engineer", "Others"],
-    departMentValue: [],
+    departmentValue: [],
     gender: "",
-    salary: "",
+    salary: "40000",
     day: "1",
     month: "Jan",
     year: "2020",
@@ -63,7 +64,7 @@ const PayrollForm = props => {
       ...formValue,
       ...obj,
       profileUrl: obj.profile,
-      departMentValue: obj.department,
+      departmentValue: obj.department,
       isUpdate: true,
       day: array[0],
       month: array[1],
@@ -103,7 +104,7 @@ const PayrollForm = props => {
       isError = true;
     }
 
-    if (formValue.departMentValue.length < 1) {
+    if (formValue.departmentValue.length < 1) {
       error.department = 'department is required field'
       isError = true;
     }
@@ -112,17 +113,17 @@ const PayrollForm = props => {
   };
 
   const onCheckChange = (name) => {
-    let index = formValue.departMentValue.indexOf(name);
+    let index = formValue.departmentValue.indexOf(name);
 
-    let checkArray = [...formValue.departMentValue]
+    let checkArray = [...formValue.departmentValue]
     if (index > -1)
       checkArray.splice(index, 1)
     else
       checkArray.push(name);
-    setForm({ ...formValue, departMentValue: checkArray });
+    setForm({ ...formValue, departmentValue: checkArray });
   }
   const getChecked = (name) => {
-    return formValue.departMentValue && formValue.departMentValue.includes(name);
+    return formValue.departmentValue && formValue.departmentValue.includes(name);
   }
 
   let handleSubmit = event => {
@@ -133,7 +134,7 @@ const PayrollForm = props => {
     // }
     let employee = {
       name: formValue.name,
-      departMent: formValue.departMentValue,
+      department: formValue.departmentValue,
       gender: formValue.gender,
       salary: formValue.salary,
       startDate: `${formValue.day} ${formValue.month} ${formValue.year}`,
@@ -142,6 +143,11 @@ const PayrollForm = props => {
       profileUrl: formValue.profileUrl,
     };
     console.log(employee);
+    employeeService.addEmployee(employee).then(data => {
+      console.log("data added");
+    }).catch(err => {
+        console.log("err while add");
+    })
   }
 
   const reset = () => {
@@ -153,8 +159,8 @@ const PayrollForm = props => {
   return (
     <div className="payroll-form">
       <header className="header row center">
-        <div className="logo">
-          <img src="" alt="" />
+        <div className="logo-content">
+          <img src={logo} alt="" />
           <div>
             <span className="emp-text">EMPLOYEE</span> <br />
             <span className="emp-text emp-payroll">PAYROLL</span>
@@ -176,6 +182,7 @@ const PayrollForm = props => {
               value={formValue.name}
               onChange={handleChange}
               placeholder="Your name.."
+              required
             />
           </div>
           <div className="error"> {formValue.error.name} </div>
@@ -194,6 +201,7 @@ const PayrollForm = props => {
                   name="profileUrl"
                   value="../../assets/profile-images/Ellipse -3.png"
                   onChange={handleChange}
+                  required
                 />
                 <img className="profile" src={profile1} alt="profile" />
               </label>
@@ -207,6 +215,7 @@ const PayrollForm = props => {
                   }
                   value="../../assets/profile-images/Ellipse 1.png"
                   onChange={handleChange}
+                  required
                 />
                 <img className="profile" src={profile1} alt="profile" />
               </label>
@@ -220,6 +229,7 @@ const PayrollForm = props => {
                   }
                   value="../../assets/profile-images/Ellipse -8.png"
                   onChange={handleChange}
+                  required
                 />
                 <img className="profile" src={profile1} alt="profile" />
               </label>
@@ -233,6 +243,7 @@ const PayrollForm = props => {
                   }
                   value="../../assets/profile-images/Ellipse -7.png"
                   onChange={handleChange}
+                  required
                 />
                 <img className="profile" src={profile1} alt="profile" />
               </label>
@@ -251,6 +262,7 @@ const PayrollForm = props => {
                 onChange={handleChange}
                 name="gender"
                 value="male"
+                required
               />
               <label className="text" htmlFor="male">
                 Male
@@ -306,10 +318,10 @@ const PayrollForm = props => {
               value={formValue.salary}
               name="salary"
               placeholder="Salary"
-              min="1000"
-              max="10000"
+              min="30000"
+              max="50000"
               step="100"
-            />
+            />  {formValue.salary}
           </div>
           <div className="error"> {formValue.error.salary} </div>
 
@@ -412,7 +424,7 @@ const PayrollForm = props => {
             </Link>
 
             <div className="submit-reset">
-              <button
+              <button to="/home"
                 type="submit"
                 className="button submitButton"
                 id="submitButton"

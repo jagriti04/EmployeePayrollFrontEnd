@@ -3,6 +3,7 @@ import Display from "./display/display";
 import EmployeeService from "../../services/employee-service";
 import addUser from "../../assets/icons/add-24px.svg"
 import {Link} from "react-router-dom";
+import logo from "../../assets/images/logo.png";
 
 class PayrollHome extends React.Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class PayrollHome extends React.Component {
       <div className="home">
         <header className="header-content header">
           <div className="logo-content">
-            <img src="../../assets/images/logo.png" />
+            <img src={logo} />
             <div>
               <span className="emp-text">EMPLOYEE</span> <br />
               <span className="emp-text emp-payroll">PAYROLL</span>

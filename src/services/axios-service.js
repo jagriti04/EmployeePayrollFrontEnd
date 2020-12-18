@@ -1,12 +1,23 @@
 const axios = require("axios").default;
 
 class AxiosService {
-  getService(url = "", tokenRequired = false, httpOptions = null) {
-    return axios.get(url, tokenRequired && httpOptions);
+  getService(url) {
+    return axios.get(url);
   }
 
-  postService(url = "", payload = null, tokenRequired = false, httpOptions = null) {
-    return axios.post(url, payload, tokenRequired && httpOptions);
+  postService(url, data) {
+    return axios({
+      method: 'post',
+      url: url,
+      data: data
+    })
+  }
+  putService(url, data) {
+    return axios({
+      method: 'put',
+      url: url,
+      data: data
+    })
   }
 }
 
