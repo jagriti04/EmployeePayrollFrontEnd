@@ -37,7 +37,7 @@
   background: #82a70c 0% 0% no-repeat padding-box;
   border: none;
   border-radius: 5px;
-  padding: 5px 18px;
+  padding: 2px 15px;
   outline: none;
   cursor: pointer;
   text-decoration: none;
@@ -70,3 +70,13 @@
   display: inline-block;
 }
 
+.search-add-div {
+  display: flex;
+  max-height: 35px;
+}
+.search-box {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 2px;
+}

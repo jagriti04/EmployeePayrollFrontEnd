@@ -2,8 +2,9 @@ import React from "react";
 import Display from "./display/display";
 import Header from "../header/header";
 import EmployeeService from "../../services/employee-service";
-import addUser from "../../assets/icons/add-24px.svg"
-import {Link} from "react-router-dom";
+import addUser from "../../assets/icons/add-24px.svg";
+import searchIcon from "../../assets/icons/create-black-18dp.svg";
+import { Link } from "react-router-dom";
 import "./payroll_home.css";
 
 class PayrollHome extends React.Component {
@@ -12,6 +13,7 @@ class PayrollHome extends React.Component {
     this.state = {
       searchExpand: false,
       employeeArray: [],
+      AllEmployeeArray: []
     };
     this.employeeService = new EmployeeService();
   }
@@ -27,6 +29,7 @@ class PayrollHome extends React.Component {
         console.log("data after get ", data.data);
         this.setState({
           employeeArray: data.data,
+          AllEmployeeArray: data.data,
         });
       })
       .catch(err => {
@@ -34,18 +37,45 @@ class PayrollHome extends React.Component {
       });
   };
 
+  search = async (event) => {
+    let search = event.target.value;
+
+    await this.setState({ employeeArray: this.state.AllEmployeeArray });
+    let empArray = this.state.employeeArray;
+    if (search.trim().length > 0)
+      empArray = empArray.filter(
+        (element) =>
+          element.name.toLowerCase().indexOf(search.toLowerCase()) > -1
+      );
+
+    this.setState({ employeeArray: empArray });
+  };
+
   render() {
     return (
       <div className="home">
-        <Header/>
+        <Header />
         <div className="main-content">
           <div className="header-content">
             <div className="emp-details-text">
-              Employee Details <div class="emp-count"> </div>
+              Employee Details <div className="emp-count"> </div>
             </div>
-            <Link to="form" className="add-button">
-              <img src={addUser} alt="add" /> Add User
+            <div className="search-add-div">
+              <div className="search-box" onClick={this.openSearch}>
+                <input
+                  className={
+                    "input " + (this.state.searchExpand && "input-expand")
+                  }
+                  onChange={this.search}
+                  type="text"
+                />
+                <img className="search-icon" src={searchIcon} alt="" />
+              </div>
+              <Link to="form" className="add-button">
+                <img src={addUser} alt="add" /> Add User
             </Link>
+            </div>
+
           </div>
 
           <div className="table-main">

@@ -47,7 +47,7 @@ const PayrollForm = props => {
     if (params.id) {
       getDataById(params.id);
     }
-  });
+  }, []);
 
   const getDataById = (id) => {
     employeeService
@@ -127,6 +127,7 @@ const PayrollForm = props => {
     setForm({ ...formValue, departmentValue: checkArray });
   }
   const getChecked = (name) => {
+    console.log("get checked -- " + name.department);
     return formValue.departmentValue && formValue.departmentValue.includes(name);
   }
 
@@ -191,7 +192,7 @@ const PayrollForm = props => {
               name="name"
               value={formValue.name}
               onChange={handleChange}
-              placeholder="Your name.."
+              placeholder="Your name..."
               required
             />
           </div>
@@ -206,10 +207,10 @@ const PayrollForm = props => {
                   type="radio"
                   checked={
                     formValue.profile ===
-                    "../../assets/profile-images/Ellipse -3.png"
+                    "../../../assets/profile-images/Ellipse -3.png"
                   }
                   name="profile"
-                  value="../../assets/profile-images/Ellipse -3.png"
+                  value="../../../assets/profile-images/Ellipse -3.png"
                   onChange={handleChange}
                   required
                 />
@@ -221,9 +222,9 @@ const PayrollForm = props => {
                   name="profile"
                   checked={
                     formValue.profile ===
-                    "../../assets/profile-images/Ellipse 1.png"
+                    "../../../assets/profile-images/Ellipse 1.png"
                   }
-                  value="../../assets/profile-images/Ellipse 1.png"
+                  value="../../../assets/profile-images/Ellipse 1.png"
                   onChange={handleChange}
                   required
                 />
@@ -235,9 +236,9 @@ const PayrollForm = props => {
                   name="profile"
                   checked={
                     formValue.profile ===
-                    "../../assets/profile-images/Ellipse -8.png"
+                    "../../../assets/profile-images/Ellipse -8.png"
                   }
-                  value="../../assets/profile-images/Ellipse -8.png"
+                  value="../../../assets/profile-images/Ellipse -8.png"
                   onChange={handleChange}
                   required
                 />
@@ -249,9 +250,9 @@ const PayrollForm = props => {
                   name="profile"
                   checked={
                     formValue.profile ===
-                    "../../assets/profile-images/Ellipse -7.png"
+                    "../../../assets/profile-images/Ellipse -7.png"
                   }
-                  value="../../assets/profile-images/Ellipse -7.png"
+                  value="../../../assets/profile-images/Ellipse -7.png"
                   onChange={handleChange}
                   required
                 />
