@@ -11,7 +11,7 @@ class PayrollHome extends React.Component {
     super(props);
     this.state = {
       searchExpand: false,
-      employeeArray: [ ],
+      employeeArray: [],
     };
     this.employeeService = new EmployeeService();
   }
@@ -44,7 +44,7 @@ class PayrollHome extends React.Component {
               Employee Details <div class="emp-count"> </div>
             </div>
             <Link to="form" className="add-button">
-              <img src={addUser} alt="" /> Add User
+              <img src={addUser} alt="add" /> Add User
             </Link>
           </div>
 
