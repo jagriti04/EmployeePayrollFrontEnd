@@ -74,9 +74,10 @@
 .row {
   display: flex;
   flex-direction: row;
-  margin-bottom: 10px;
+  margin-top: 12px;
   align-items: center;
   border: 0px solid green;
+  text-align: left;
 }
 
 .label {
@@ -133,7 +134,7 @@ select {
 .button {
   font: normal normal normal 20px/26px Roboto;
   letter-spacing: 0px;
-  color: #42515f;
+  color: black;
   opacity: 1;
   font-weight: 400;
   min-width: 140px;
@@ -145,17 +146,24 @@ select {
 }
 .submitButton {
   margin-right: 20px;
+  background-color: green;
 }
 .cancelButton {
   text-decoration: none;
   text-align: center;
+  background-color: red;
 }
 
-error-output {
+.resetButton{
+  background-color: blue;
+}
+
+.error{
   margin-left: 10px;
   font-size: 12px;
   font-style: italic;
   color: red;
+  text-align: end;
 }
 
 .slider {
@@ -195,7 +203,6 @@ error-output {
   }
   .form {
     width: 85%;
-    padding: 44px 20px;
   }
 }
 

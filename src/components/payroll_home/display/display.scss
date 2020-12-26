@@ -10,6 +10,11 @@
   min-width: 800px;
   tr {
     min-width: 100%;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: 1px solid #e3e3e3;
+    border-radius: 3px;
+    align-items: center;
+
   td, th {
     text-align: left;
     padding: 5px 8px;
@@ -25,17 +30,6 @@
     text-transform: uppercase;
     opacity: 1;
     border: 0px solid #dddddd;
-  }
-
-  tr:not(:first-child) {
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border: 1px solid #e3e3e3;
-    border-radius: 3px;
-  }
-
-  td:first-child {
-    display: flex;
-    align-items: center;
   }
 
   td img:first-child {

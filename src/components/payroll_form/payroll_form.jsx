@@ -7,6 +7,22 @@ import "./payroll_form.css";
 import { useParams, Link, withRouter } from "react-router-dom";
 import EmployeeService from "../../services/employee-service";
 import Header from "../header/header";
+import { Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 const PayrollForm = props => {
   let initialValue = {
@@ -56,6 +72,7 @@ const PayrollForm = props => {
         console.log("in form data is ", data.data);
         let obj = data.data;
         setData(obj);
+        getChecked();
       })
       .catch((err) => {
         console.log("err is ", err);
@@ -74,11 +91,19 @@ const PayrollForm = props => {
       month: array[1],
       year: array[2],
     });
+    console.log("in set data -- ");
+    console.log(formValue);
   };
 
-
   let handleChange = event => {
-    setForm({ ...formValue, [event.target.name]: event.target.value })
+    console.log("in on change method");
+    setForm({
+      ...formValue,
+      [event.target.name]: event.target.value,
+      startdate: `${formValue.day} ${formValue.month} ${formValue.year}`
+    });
+    console.log(formValue);
+    console.log("in on handle change method --- " + formValue + " " + formValue.day);
   };
 
   let validFormData = async () => {
@@ -91,25 +116,32 @@ const PayrollForm = props => {
       profile: '',
       startdate: ''
     }
+
+    const selectedDate = new Date(formValue.startdate);
     if (formValue.name.length < 3) {
-      error.name = 'name is required field'
+      error.name = 'Name length should be greater than 3'
+      isError = true;
+    } else if (!formValue.name.match("^([A-Z])[A-Za-z\\s]{2,}$")) {
+      error.name = 'Name should be in correct format. Eg. Bill Gates'
       isError = true;
     }
     if (formValue.gender.length < 1) {
-      error.gender = 'gender is required field'
+      error.gender = 'Select the gender'
       isError = true;
     }
-    if (formValue.salary.length < 1) {
-      error.salary = 'salary is required field'
-      isError = true;
-    }
+
     if (formValue.profile.length < 1) {
-      error.profile = 'profile is required field'
+      error.profile = 'Select the profile picture'
       isError = true;
     }
 
     if (formValue.departmentValue.length < 1) {
-      error.department = 'department is required field'
+      error.department = 'Select atleast one department';
+      isError = true;
+    }
+    console.log(selectedDate > Date.now());
+    if (selectedDate > Date.now()) {
+      error.startdate = 'Date is not valid';
       isError = true;
     }
     await setForm({ ...formValue, error: error })
@@ -127,7 +159,7 @@ const PayrollForm = props => {
     setForm({ ...formValue, departmentValue: checkArray });
   }
   const getChecked = (name) => {
-    console.log("get checked -- " + name.department);
+    console.log(formValue.departmentValue);
     return formValue.departmentValue && formValue.departmentValue.includes(name);
   }
 
@@ -148,21 +180,26 @@ const PayrollForm = props => {
       profile: formValue.profile,
     };
     formValue.departmentValue.map((data) => {
-      employee.department.push(data)});
+      employee.department.push(data)
+    });
     employee.id = params.id;
     console.log(employee);
 
     if (formValue.isUpdate === true) {
       employeeService.updateEmployee(employee).then(data => {
-        console.log("updated successfully");
-        props.history.push('/home');
+        setOpen(true);
+        setTimeout( () => {
+          props.history.push('/home');
+        }, 2000)
       }).catch(err => {
         console.log("error in updation is ", err);
       })
     } else {
       employeeService.addEmployee(employee).then(data => {
-        console.log("data added");
-        props.history.push('/home');
+        setOpen(true);
+        setTimeout( () => {
+          props.history.push('/home');
+        }, 2000);
       }).catch(err => {
         console.log("err while add");
       })
@@ -174,6 +211,16 @@ const PayrollForm = props => {
 
     console.log(formValue);
   }
+
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   return (
     <div className="payroll-form">
@@ -430,7 +477,7 @@ const PayrollForm = props => {
           </div>
 
           <div className="buttonParent">
-            <Link to="/home" className="resetButton button cancelButton">
+            <Link to="/home" className="button cancelButton">
               Cancel
             </Link>
 
@@ -449,6 +496,11 @@ const PayrollForm = props => {
                 Reset
               </button>
             </div>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success">
+                Data added successfully!
+              </Alert>
+            </Snackbar>
           </div>
         </form>
       </div>

@@ -8,6 +8,23 @@ import profile3 from "../../../assets/profile-images/Ellipse -8.png";
 import profile4 from "../../../assets/profile-images/Ellipse -7.png";
 import edit from "../../../assets/icons/create-black-18dp.svg";
 import deleteImg from "../../../assets/icons/delete-black-18dp.svg"
+import { Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
+
 
 const Display = (props) => {
   const employeeService = new EmployeeService();
@@ -16,7 +33,7 @@ const Display = (props) => {
     console.log("in remove func " + empId);
     employeeService.deleteEmployee(empId)
       .then(data => {
-        console.log("deleted successfully");
+        setOpen(true);
         props.getAllEmployees();
       }).catch(err => {
         console.log("error in deletion ", err);
@@ -26,6 +43,16 @@ const Display = (props) => {
   const update = (empId) => {
     console.log("in update func " + empId);
   }
+
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   return (
     <div className="tableDiv">
@@ -77,6 +104,11 @@ const Display = (props) => {
             ))}
         </tbody>
       </table>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Data deleted successfully!
+        </Alert>
+      </Snackbar>
     </div>
 
   );
