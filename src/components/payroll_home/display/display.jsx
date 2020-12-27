@@ -11,6 +11,8 @@ import deleteImg from "../../../assets/icons/delete-black-18dp.svg"
 import { Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -30,14 +32,31 @@ const Display = (props) => {
   const employeeService = new EmployeeService();
 
   const remove = (empId) => {
-    console.log("in remove func " + empId);
-    employeeService.deleteEmployee(empId)
-      .then(data => {
-        setOpen(true);
-        props.getAllEmployees();
-      }).catch(err => {
-        console.log("error in deletion ", err);
-      })
+    confirmAlert({
+      title: 'Confirm to delete data',
+      message: 'Are you sure to do this.',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            console.log("in remove func " + empId);
+            employeeService.deleteEmployee(empId)
+              .then(data => {
+                setOpen(true);
+                props.getAllEmployees();
+              }).catch(err => {
+                console.log("error in deletion ", err);
+              })
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => {
+            console.log("no selected");
+          }
+        }
+      ]
+    });
   }
 
   const update = (empId) => {

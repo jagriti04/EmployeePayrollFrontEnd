@@ -33,8 +33,8 @@ const PayrollForm = props => {
       { url: "../../assets/profile-images/Ellipse -8.png" },
       { url: "../../assets/profile-images/Ellipse -7.png" }
     ],
-    allDepartment: [{ "department": 'HR', "id": 1 }, { "department": 'Engineer', "id": 2 },
-    { "department": 'Finance', "id": 3 }, { "department": 'Sales', "id": 4 }, { "department": 'Others', "id": 5 }],
+    allDepartment: [{"id": 1, "department": 'HR' }, { "id": 2, "department": 'Engineer' },
+    { "id": 3 , "department": 'Finance'}, {"id": 4, "department": 'Sales' }, {"id": 5, "department": 'Others' }],
     departmentValue: [],
     gender: "",
     salary: "40000",
@@ -72,7 +72,6 @@ const PayrollForm = props => {
         console.log("in form data is ", data.data);
         let obj = data.data;
         setData(obj);
-        getChecked();
       })
       .catch((err) => {
         console.log("err is ", err);
@@ -91,8 +90,6 @@ const PayrollForm = props => {
       month: array[1],
       year: array[2],
     });
-    console.log("in set data -- ");
-    console.log(formValue);
   };
 
   let handleChange = event => {
@@ -149,18 +146,26 @@ const PayrollForm = props => {
   };
 
   const onCheckChange = (name) => {
+    console.log("..... ", formValue.departmentValue);
     let index = formValue.departmentValue.indexOf(name);
-
+    console.log(name, " in check method--- ", index);
     let checkArray = [...formValue.departmentValue]
+    console.log(" check array is --- " , formValue.departmentValue, " and ", checkArray);
     if (index > -1)
       checkArray.splice(index, 1)
     else
       checkArray.push(name);
+    console.log(formValue.departmentValue);
     setForm({ ...formValue, departmentValue: checkArray });
   }
   const getChecked = (name) => {
-    console.log(formValue.departmentValue);
-    return formValue.departmentValue && formValue.departmentValue.includes(name);
+    let isChecked = false;
+    formValue.departmentValue.forEach((dept) => {
+      if (dept.department === name.department) {
+        isChecked = true;
+      }
+    });
+    return formValue.departmentValue && isChecked;
   }
 
   let handleSubmit = async event => {
@@ -355,7 +360,7 @@ const PayrollForm = props => {
                     checked={getChecked(item)}
                     value={item.department}
                   />
-                  <label className="text" htmlFor={item.department}>
+                  <label className="text dept-text" htmlFor={item.department}>
                     {item.department}
                   </label>
                 </span>

@@ -60,6 +60,7 @@
   border-radius: 8px;
   opacity: 1;
   margin: auto;
+  margin-bottom: 20px;
 }
 
 .form-head {
@@ -89,6 +90,10 @@
   color: #42515f;
   opacity: 1;
   font-family: Roboto;
+}
+
+.dept-text{
+  margin-right: 5px;
 }
 
 .input {

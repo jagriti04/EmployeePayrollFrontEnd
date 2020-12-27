@@ -44,7 +44,6 @@
   display: flex;
 }
 
-/* UC2 */
 .main-content {
   display: flex;
   flex-direction: column;
@@ -75,9 +74,37 @@
   display: flex;
   max-height: 35px;
 }
-.search-box {
+/* .search-box {
   display: flex;
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-right: 2px;
+} */
+
+/* .search-icon{
+  height: 70%;
+} */
+.search-box {
+  position: relative;
+  margin-right: 18px;
+}  
+.search-input {
+    width: 180px;
+    padding: 8.5px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    z-index: 10;
+    transition-duration: 0.4s;
+    -moz-transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s;
+    -o-transition-duration: 0.4s;
+    outline: none;
+  }
+.search-icon {
+  position: absolute;
+  right: 5px;
+  z-index: 10;
+  width: 28px;
+  top: 4px;
 }

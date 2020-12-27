@@ -3,7 +3,7 @@ import Display from "./display/display";
 import Header from "../header/header";
 import EmployeeService from "../../services/employee-service";
 import addUser from "../../assets/icons/add-24px.svg";
-import searchIcon from "../../assets/icons/create-black-18dp.svg";
+import searchIcon from "../../assets/icons/search.png";
 import { Link } from "react-router-dom";
 import "./payroll_home.css";
 
@@ -57,15 +57,13 @@ class PayrollHome extends React.Component {
         <Header />
         <div className="main-content">
           <div className="header-content">
-            <div className="emp-details-text">
+            <div className="emp-text ">
               Employee Details <div className="emp-count"> </div>
             </div>
             <div className="search-add-div">
               <div className="search-box" onClick={this.openSearch}>
                 <input
-                  className={
-                    "input " + (this.state.searchExpand && "input-expand")
-                  }
+                  className="search-input"
                   onChange={this.search}
                   type="text"
                 />
